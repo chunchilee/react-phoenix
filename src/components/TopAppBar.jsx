@@ -20,10 +20,8 @@ const TopAppBar = ({ toggleSidebar }) => {
   const navigation = useNavigation(); // 監測載入狀態
   const [showMenu, setShowMenu] = useToggle();
 
-  // 當前登入的使用者資料
-  const { conversations, user } = useLoaderData();
-  // 取得當前 URL conversationId
-  const params = useParams();
+  const { conversations, user } = useLoaderData(); // 當前登入的使用者資料
+  const params = useParams(); // 取得當前 URL conversationId
   const submit = useSubmit();
 
   const isNormalLoad = navigation.state === 'loading' && !navigation.formData;

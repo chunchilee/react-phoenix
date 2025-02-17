@@ -14,7 +14,6 @@ import TextField from "../components/TextField"
 const ResetPassword = () => {
   const navigation = useNavigation();
   const actionData = useActionData();
-
   const { showSnackbar } = useSnackbar();
 
   useEffect(() => {

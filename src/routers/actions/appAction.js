@@ -3,16 +3,16 @@ import { getAiResponse, getConversationTitle } from '../../api/googleApi';
 import { account, databases } from '../../lib/appwrite';
 import generateID from '../../utils/generateID';
 
+// 對話框提交表單後，新增新的會話
 const userPromptAction = async (formData) => {
   const userPrompt = formData.get('user_prompt');
-
   const user = await account.get();
-
-  const conversationTitle = await getConversationTitle(userPrompt);
+  const conversationTitle = await getConversationTitle(userPrompt); // 根據用戶提示生成對話標題
 
   let conversation = null;
 
   try {
+    // 嘗試創建一個新的對話文檔，並捕獲任何錯誤
     conversation = await databases.createDocument(
       import.meta.env.VITE_APPWRITE_DATABASE_ID,
       'conversations',
@@ -26,9 +26,10 @@ const userPromptAction = async (formData) => {
     console.log(`Error creating conversation: ${err.message}`);
   }
 
-  const aiResponse = await getAiResponse(userPrompt);
+  const aiResponse = await getAiResponse(userPrompt); // 獲取 AI 回應
 
   try {
+    // 嘗試創建一個新的聊天文檔，並捕獲任何錯誤
     await databases.createDocument(
       import.meta.env.VITE_APPWRITE_DATABASE_ID,
       'chats',
@@ -45,8 +46,9 @@ const userPromptAction = async (formData) => {
 
   return redirect(`/${conversation.$id}`);
 };
-
+// 刪除指定 id、title 的會話
 const conversationAction = async (formData) => {
+  // 刪除資料後回傳給 snackbar 顯示出來
   const conversationId = formData.get('conversation_id');
   const conversationTitle = formData.get('conversation_title');
 

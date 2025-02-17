@@ -12,7 +12,7 @@ const CircularProgress = ({ classes = '', size = '' }) => {
 }
 
 CircularProgress.propTypes = {
-  class: PropTypes.string,
+  classes: PropTypes.string,
   size: PropTypes.string
 }
 

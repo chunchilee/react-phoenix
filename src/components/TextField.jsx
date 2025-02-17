@@ -10,7 +10,7 @@ const TextField = ({
   ...rest
 }) => {
   return (
-    <div className={`text-field-wrapper ${classes}`}>
+    <div className={`text-field-wrapper ${classes}`} {...rest}>
       <label htmlFor={name} className="label-text">
         {label}
       </label>

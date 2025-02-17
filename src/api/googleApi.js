@@ -1,7 +1,6 @@
 // getConversationTitle 函數根據用戶提示生成對話標題。
 // getAiResponse 函數根據用戶提示生成 AI 回應。
 
-import { databases } from '../lib/appwrite';
 import model from '../lib/googleAi';
 
 const getConversationTitle = async (userPrompt) => {

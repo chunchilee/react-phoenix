@@ -27,7 +27,7 @@ const Snackbar = ({ snackbar }) => {
             className={`snackbar ${snackbar.type}`}
             initial='hidden'
             animate='visible'
-            exit={{ opacity: 0, transition: { duration: 0.15, ease: 'easeOut' } }}
+            exit={{ opacity: 0, transition: { duration: 0.15, ease: 'easeOut' } }} // false 時啟用
           >
             <motion.span
               variants={snackbarChildrenVariant}

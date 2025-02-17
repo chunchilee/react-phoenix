@@ -42,7 +42,7 @@ const App = () => {
   // 點擊登出為 true
   const isNormalLoad = navigation.state === 'loading' && !navigation.formData;
 
-  // 將刪除的conversationTitle 顯示到 showSnackbar
+  // 將刪除的conversationTitle 資料傳遞給 showSnackbar 顯示出來
   useEffect(() => {
     if (actionData?.conversationTitle) {
       showSnackbar({
@@ -51,11 +51,11 @@ const App = () => {
     }
   }, [actionData, showSnackbar])
 
-  // 當 promptPreloaderValue 或 charHistoryRef 改變時，取得了 chatHistoryRef 所引用目前的 HTML 元素。然後我們檢查 promptPreloaderValue 是否為真，這表示正在載入新訊息。如果是真的，我們就把聊天記錄平滑地滾動到底部。這確保了加載新內容後最新消息始終可見。
+  // 需入新的問題後，聊天記錄平滑地滾動到底部。確保了加載新內容後最新消息始終可見。
   useEffect(() => {
     const chatHistory = chatHistoryRef.current;
-    if (promptPreloaderValue) {
 
+    if (promptPreloaderValue) {
       chatHistory.scroll({
         top: chatHistory.scrollHeight - chatHistory.clientHeight,
         behavior: 'smooth',

@@ -3,7 +3,6 @@ import { useNavigation } from 'react-router-dom';
 
 const usePromptPreloader = () => {
   const navigation = useNavigation();
-
   const [promptPreloaderValue, setPromptPreloaderValue] = useState('');
 
   useEffect(() => {

@@ -16,8 +16,9 @@ const UserPrompt = ({ text }) => {
   const { user } = useLoaderData();
   const textBoxRef = useRef();
   const [hasMoreContent, setMoreContent] = useState(false);
-
   const [isExpanded, toggleExpand] = useToggle();
+
+  // 載入文本後，超過畫面收起來
   useEffect(() => {
     setMoreContent(textBoxRef.current.scrollHeight > textBoxRef.current.clientHeight)
   }, [textBoxRef])

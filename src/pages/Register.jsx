@@ -14,7 +14,6 @@ import TextField from "../components/TextField"
 const Register = () => {
   const navigation = useNavigation();
   const error = useActionData();
-
   const { showSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -22,6 +21,7 @@ const Register = () => {
       showSnackbar({ message: error.message, type: 'error' })
     }
   }, [error, showSnackbar])
+
   return (
     <>
       <PageTitle title='Create an account' />

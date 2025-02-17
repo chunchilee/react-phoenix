@@ -3,6 +3,7 @@ import { account } from '../../lib/appwrite';
 
 const loginAction = async ({ request }) => {
   const formData = await request.formData();
+
   try {
     await account.createEmailPasswordSession(
       formData.get('email'),

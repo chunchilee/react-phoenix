@@ -3,7 +3,10 @@ import { redirect } from 'react-router-dom';
 import { account } from '../../lib/appwrite';
 
 const resetPasswordLoader = async ({ request }) => {
+  // 不是在組件中使用，無法使用react router
+  // 將請求的 URL 轉換為 URL 對象
   const url = new URL(request.url);
+
   try {
     // 嘗試檢查使用者的帳戶訊息
     await account.get();

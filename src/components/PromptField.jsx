@@ -7,6 +7,7 @@ import { useNavigation, useParams, useSubmit } from 'react-router-dom';
 const PromptField = () => {
   const inputField = useRef();
   const inputFieldContainer = useRef();
+  const debounceTimeout = useRef(null);
 
   const [placeholderShown, setPlaceholderShown] = useState(true);
   const [isMultiline, setMultiline] = useState(false);
@@ -16,15 +17,21 @@ const PromptField = () => {
   const submit = useSubmit(); // 手動提交
   const navigation = useNavigation() // 初始導航檢查
   const { conversationId } = useParams(); // router child pathURL
-  console.log(navigation.state)
-  // 輸入欄位改變
-  const handleInputChange = useCallback(() => {
-    if (inputField.current.innerText === '\n') { inputField.current.innerHTML = '' };
 
-    setPlaceholderShown(!inputField.current.innerText);
-    setMultiline(inputFieldContainer.current.clientHeight > 64);
-    setInputValue(inputField.current.innerText.trim());
-  }, [])
+  // 輸入欄位改變，300ms 的 debounce 時間
+  const handleInputChange = useCallback(() => {
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+
+    debounceTimeout.current = setTimeout(() => {
+      if (inputField.current.innerText === '\n') { inputField.current.innerHTML = '' };
+
+      setPlaceholderShown(!inputField.current.innerText);
+      setMultiline(inputFieldContainer.current.clientHeight > 64);
+      setInputValue(inputField.current.innerText.trim());
+    }, 300);
+  }, []);
 
   // 複製貼上鼠標移動到最後
   const moveCursorToEnd = useCallback(() => {
@@ -47,6 +54,7 @@ const PromptField = () => {
     moveCursorToEnd();
   }, [handleInputChange, moveCursorToEnd])
 
+  // <div contentEditable onKeydown /> 提交表單
   const handleSubmit = useCallback(() => {
     // 如果輸入為空或表單提交正在進行，則阻止提交
     if (!inputValue || navigation.state === 'submitting') return;
@@ -96,12 +104,12 @@ const PromptField = () => {
       ref={inputFieldContainer}
     >
       <motion.div // 可編輯區塊擁有動畫效果 
-        className={`prompt-field ${placeholderShown ? '' : 'after:hidden'}`}
+        className={`prompt-field ${placeholderShown ? '' : 'after:hidden'}`} // placeholder
         contentEditable={true} // 讓 div 變成可編輯的區域
         role='textbox'
         aria-multiline={true}
         aria-label='Enter a prompt here'
-        data-placeholder='Enter a prompt here'
+        data-placeholder='Enter a prompt here' // css placeholder after
         variants={promptFieldChildrenVariant}
         ref={inputField}
         onInput={handleInputChange} // 監聽用戶輸入並獲取內容

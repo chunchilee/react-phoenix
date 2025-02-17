@@ -16,7 +16,6 @@ const initialCtxValue = {
 export const SnackbarContext = createContext(initialCtxValue);
 
 const SnackbarProvider = ({ children }) => {
-
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',

@@ -2,7 +2,6 @@ import { account } from '../../lib/appwrite';
 
 const resetLinkAction = async ({ request }) => {
   const formData = await request.formData();
-
   const email = formData.get('email');
 
   try {
