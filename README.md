@@ -5,30 +5,6 @@
 
 此外，專案還使用 **React Markdown** 和 **React Syntax Highlighter** 來處理 Markdown 渲染，並透過 **Gemini-1.5-Flash** 進行 LLM 模型串接。
 
-## 🛠️ 技術棧
-
-- **開發框架**：React.js + Vite
-- **路由管理**：React Router
-- **SEO 優化**：React Helmet
-- **Markdown 支援**：React Markdown + Remark GFM
-- **語法高亮**：React Syntax Highlighter
-- **動畫效果**：Framer Motion
-- **CSS 框架**：Tailwind CSS
-- **後端服務**：Appwrite
-- **AI 模型串接**：Gemini-1.5-Flash
-
-## 📦 安裝與運行
-
-1. 安裝專案依賴：
-   ```sh
-   npm install
-   ```
-
-2. 啟動開發伺服器：
-   ```sh
-   npm run dev
-   ```
-
 ## 🎨 主要功能
 
 - 使用 **React Router** 進行單頁應用程式（SPA）路由管理。
